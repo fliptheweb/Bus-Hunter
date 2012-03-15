@@ -48,47 +48,49 @@ $(document).ready(function() {
         dataType: "json",
         success : function(data){
 //      console.log(data.vehicles.veh.length);
+//          console.log(data.);
+          if(data.vehicles != null){
+            var data = data.vehicles.veh;
 
-          var data = data.vehicles.veh;
-
-          for (i = 0; i < data.length; i++){
-            var bus       = data[i],
+            for (i = 0; i < data.length; i++){
+              var bus       = data[i],
                 busCoord  = new L.LatLng(bus.lat/1000000, bus.lon/1000000),
                 busMarker = new L.Marker(busCoord);
 
-            //todo переписать это позорище ;)
-            var busExist = false;
-            for (ii = 0; ii < app.buses.length; ii++) {
-              if (app.buses[ii] != undefined){
-                if(bus.gos_num == app.buses[ii].busNum){
-                  app.buses[ii].busMarker.setLatLng(busCoord);
-                  busExist = true;
+              //todo переписать это позорище ;)
+              var busExist = false;
+              for (ii = 0; ii < app.buses.length; ii++) {
+                if (app.buses[ii] != undefined){
+                  if(bus.gos_num == app.buses[ii].busNum){
+                    app.buses[ii].busMarker.setLatLng(busCoord);
+                    busExist = true;
+                  }
                 }
               }
-            }
 
-            //if bus dont exist add marker and
-            if(!busExist){
-              map.addLayer(busMarker);
-              app.buses.push({
-                "busNum"    : bus.gos_num,
-                "busMarker" : busMarker,
-                "parseObj"  : bus
-              });
-            }
+              //if bus dont exist add marker and
+              if(!busExist){
+                map.addLayer(busMarker);
+                app.buses.push({
+                  "busNum"    : bus.gos_num,
+                  "busMarker" : busMarker,
+                  "parseObj"  : bus
+                });
+              }
 
-            //animated
-            if(bus.anim_pos){
-              animatedBuses.push({
-                "animate"   : bus.anim_pos,
-                "busMarker" : busMarker
-              })
-            }
-          } //for
+              //animated
+              if(bus.anim_pos){
+                animatedBuses.push({
+                  "animate"   : bus.anim_pos,
+                  "busMarker" : busMarker
+                })
+              }
+            } //for
 
-          //do animation here
-          app.animateBuses();
+            //do animation here
+            app.animateBuses();
 //          app.buses = busesDump;
+          }
         }
       });
     },
