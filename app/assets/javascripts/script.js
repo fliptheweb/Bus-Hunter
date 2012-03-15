@@ -20,9 +20,9 @@ $(document).ready(function() {
       };
       var mapCenter = new L.LatLng(defaultCoords.lat, defaultCoords.lng);
       map.setView(mapCenter, defaultCoords.zoom);
-//      this.setCurrentCoords();
+      this.setCurrentCoords();
       this.drawBuses();
-//      this.refreshInterval = setInterval(this.drawBuses, 15000);
+      this.refreshInterval = setInterval(this.drawBuses, 10000);
     },
 
     //get geolocation
@@ -32,7 +32,7 @@ $(document).ready(function() {
           function(position){
             console.log(position);
             var mapCenter = new L.LatLng(position.coords.latitude, position.coords.longitude);
-            map.setView(mapCenter, 15);
+            map.setView(mapCenter, 16);
           }
         );
       }
