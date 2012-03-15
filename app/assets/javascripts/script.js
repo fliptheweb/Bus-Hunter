@@ -30,7 +30,7 @@ $(document).ready(function() {
       if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(
           function(position){
-            console.log(position);
+//            console.log(position);
             var mapCenter = new L.LatLng(position.coords.latitude, position.coords.longitude);
             map.setView(mapCenter, 16);
           }
@@ -61,7 +61,7 @@ $(document).ready(function() {
               var busExist = false;
               for (ii = 0; ii < app.buses.length; ii++) {
                 if (app.buses[ii] != undefined){
-                  if(bus.id == app.buses[ii].id){
+                  if(bus.id == app.buses[ii].busId){
                     app.buses[ii].busMarker.setLatLng(busCoord);
                     busExist = true;
                   }
@@ -80,10 +80,10 @@ $(document).ready(function() {
 
               //animated
               if(bus.anim_pos){
-                animatedBuses.push({
-                  "animate"   : bus.anim_pos,
-                  "busMarker" : busMarker
-                })
+//                animatedBuses.push({
+//                  "animate"   : bus.anim_pos,
+//                  "busMarker" : busMarker
+//                });
               }
             } //for
 
