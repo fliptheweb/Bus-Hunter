@@ -6,16 +6,14 @@ $(document).ready(function() {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
     maxZoom: 18
   });
-  //todo rewrite to object
-  var apiUrl = "http://78.31.72.3/bus/common/map6/getRoutesVehicles.php?city=ryazan&ids=13;0&r=0.637920456007123";
 
   $.ajax({
-    url: apiUrl,
+    url: "/api",
     type: "get",
     data: {},
-    dataType: "xml",
+    dataType: "json",
     success : function(data){
-      console.log(data);
+      console.log(data.vehicles.veh);
     }
   });
 
