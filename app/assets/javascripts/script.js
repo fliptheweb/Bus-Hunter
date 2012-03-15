@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-  var map = new L.Map($(".js-map")[0]);
+  var map = new L.Map($(".js-map")[0]),
+      $refreshButton = $(".js-map-refresh");
   var cloudmade = new L.TileLayer('http://{s}.tile.cloudmade.com/b046d1ecb48e42b6a6566b08c1f377ac/997/256/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
     maxZoom: 18
@@ -9,7 +10,7 @@ $(document).ready(function() {
 
   var app = {
     init : function(){
-      //set default coords  to vl
+      //set default coords to vl
       var defaultCoords = {
         lat : "54.619886",
         lng : "39.744954",
@@ -53,9 +54,11 @@ $(document).ready(function() {
           }
         }
       });
-
     }
   };
 
   app.init();
+  $refreshButton.bind("click", function(){
+    app.drawBuses();
+  })
 });

@@ -27,6 +27,18 @@ html{
     /*margin-top: -70px;*/
     overflow: hidden;
 }
+.js-map-refresh{
+  background: #adadad;
+  height: 30px;
+  width: 30px;
+  /*border: 1px solid #000000;*/
+  border-radius: 5px;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 10000;
+  cursor: pointer;
+}
 /************************ helpers ***********************/
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .ir br { display: none; }
