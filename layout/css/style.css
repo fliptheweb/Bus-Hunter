@@ -18,13 +18,14 @@ html{
     /*margin-top: -70px;*/
     background: #fff;
     float: left;
+    display: none;
 }
 .l-content{
     background: #d0cfff;
     height: 100%;
     width: 100%;
     /*margin-top: -70px;*/
-
+    overflow: hidden;
 }
 /************************ helpers ***********************/
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
