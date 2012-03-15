@@ -12,14 +12,15 @@ $(document).ready(function() {
     init : function(){
       //set default coords to vl
       var defaultCoords = {
-        lat : "54.619886",
-        lng : "39.744954",
+        lat  : "54.619886",
+        lng  : "39.744954",
         zoom : 14
       };
       var mapCenter = new L.LatLng(defaultCoords.lat, defaultCoords.lng);
       map.setView(mapCenter, defaultCoords.zoom);
 //      this.setCurrentCoords();
       this.drawBuses();
+      this.refreshInterval = setInterval(this.drawBuses, 15000);
     },
 
     //get geolocation
@@ -37,7 +38,7 @@ $(document).ready(function() {
 
     //get buses and draw
     drawBuses: function(){
-      var app = this;
+//      var app = this;
       $.ajax({
         url: "/api",
         type: "get",
@@ -46,13 +47,11 @@ $(document).ready(function() {
         success : function(data){
 //      console.log(data.vehicles.veh.length);
 
-          var data = data.vehicles.veh,
-//              buses = app.buses,
-              busesDump = [];
+          var data = data.vehicles.veh;
 
           for (i = 0; i < data.length; i++){
-            var bus = data[i],
-                busCoord = new L.LatLng(bus.lat/1000000, bus.lon/1000000),
+            var bus       = data[i],
+                busCoord  = new L.LatLng(bus.lat/1000000, bus.lon/1000000),
                 busMarker = new L.Marker(busCoord);
 
             //todo переписать это позорище ;)
@@ -70,19 +69,43 @@ $(document).ready(function() {
             if(!busExist){
               map.addLayer(busMarker);
               app.buses.push({
-                "busNum": bus.gos_num,
-                "busMarker": busMarker
+                "busNum"    : bus.gos_num,
+                "busMarker" : busMarker,
+                "parseObj"  : bus
               });
+            }
+
+            //animated
+            if(bus.anim_pos){
+              animatedBuses.push({
+                "animate"   : bus.anim_pos,
+                "busMarker" : busMarker
+              })
             }
           } //for
 
+          //do animation here
+          app.animateBuses();
 //          app.buses = busesDump;
         }
       });
     },
 
     //array of buses
-    buses: []
+    buses: [],
+
+    //array of animated buses
+    animatedBuses: [],
+
+    //animate buses
+    animateBuses : function(){
+       //<pts big_jump=\"0\" key=\"1348\">
+       //<p lon=\"39733515\" lat=\"54627972\" dir=\"270\" percent=\"50\" />
+       //<p lon=\"39733515\" lat=\"54628593\" dir=\"270\" percent=\"50\" />
+       //</pts>
+    },
+
+    refreshInterval :undefined
 
   };
 
