@@ -61,7 +61,7 @@ $(document).ready(function() {
               var busExist = false;
               for (ii = 0; ii < app.buses.length; ii++) {
                 if (app.buses[ii] != undefined){
-                  if(bus.gos_num == app.buses[ii].busNum){
+                  if(bus.id == app.buses[ii].id){
                     app.buses[ii].busMarker.setLatLng(busCoord);
                     busExist = true;
                   }
@@ -72,7 +72,7 @@ $(document).ready(function() {
               if(!busExist){
                 map.addLayer(busMarker);
                 app.buses.push({
-                  "busNum"    : bus.gos_num,
+                  "busId"    : bus.id,
                   "busMarker" : busMarker,
                   "parseObj"  : bus
                 });
