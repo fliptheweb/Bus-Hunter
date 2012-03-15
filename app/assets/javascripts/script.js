@@ -12,8 +12,10 @@ $(document).ready(function() {
     init : function(){
       //set default coords to vl
       var defaultCoords = {
-        lat  : "54.619886",
-        lng  : "39.744954",
+        //lat  : "54.619886",
+        //lng  : "39.744954",
+        lat : "43.113426",
+        lng : "131.911641",
         zoom : 14
       };
       var mapCenter = new L.LatLng(defaultCoords.lat, defaultCoords.lng);
