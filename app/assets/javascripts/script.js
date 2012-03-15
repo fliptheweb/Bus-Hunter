@@ -20,7 +20,7 @@ $(document).ready(function() {
       map.setView(mapCenter, defaultCoords.zoom);
 //      this.setCurrentCoords();
       this.drawBuses();
-      this.refreshInterval = setInterval(this.drawBuses, 15000);
+//      this.refreshInterval = setInterval(this.drawBuses, 15000);
     },
 
     //get geolocation

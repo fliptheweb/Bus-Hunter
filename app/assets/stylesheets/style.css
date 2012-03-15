@@ -1,37 +1,30 @@
 body,
 html{
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .l-container{
-    height: 100%;
-    background: #000;
+  height: 100%;
 }
-/*.l-header{*/
-    /*height: 70px;*/
-    /*background: #fff56f;*/
-    /*position: relative;*/
-/*}*/
 .l-sidebar{
-    width: 200px;
-    height: 100%;
-    /*margin-top: -70px;*/
-    background: #fff;
-    float: left;
-    display: none;
+  width: 242px;
+  height: 100%;
+  float: left;
+  background: url(/assets/sidebar.png) repeat-y left top;
+  margin-right: -10px;
+  position: relative;
+  z-index: 10000;
+  overflow: hidden;
 }
 .l-content{
-    background: #d0cfff;
-    height: 100%;
-    width: 100%;
-    /*margin-top: -70px;*/
-    overflow: hidden;
+  background: #d0cfff;
+  height: 100%;
+  overflow: hidden;
 }
 .js-map-refresh{
   background: #adadad;
   height: 30px;
   width: 30px;
-  /*border: 1px solid #000000;*/
   border-radius: 5px;
   position: absolute;
   top: 30px;
@@ -39,6 +32,17 @@ html{
   z-index: 10000;
   cursor: pointer;
 }
+
+/********** sidebar **********/
+div.logo{
+  background: url(/assets/logo.png) no-repeat left top;
+  width: 148px;
+  height: 119px;
+  text-indent: -9000px;
+  margin: 19px 0 0 44px;
+
+}
+
 /************************ helpers ***********************/
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .ir br { display: none; }
@@ -62,16 +66,16 @@ html{
 
 /************************ print styles ***********************/
 @media print {
-    * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; }
-    a, a:visited { text-decoration: underline; }
-    a[href]:after { content: " (" attr(href) ")"; }
-    abbr[title]:after { content: " (" attr(title) ")"; }
-    .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
-    pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-    thead { display: table-header-group; }
-    tr, img { page-break-inside: avoid; }
-    img { max-width: 100% !important; }
-    @page { margin: 0.5cm; }
-    p, h2, h3 { orphans: 3; widows: 3; }
-    h2, h3 { page-break-after: avoid; }
+  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; }
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
 }
