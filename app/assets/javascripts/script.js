@@ -7,27 +7,36 @@ $(document).ready(function() {
     maxZoom: 18
   });
 
-  $.ajax({
-    url: "/api",
-    type: "get",
-    data: {},
-    dataType: "json",
-    success : function(data){
-      console.log(data.vehicles.veh);
-    }
-  });
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       function(position){
         var longitude = position.coords.longitude,
-          latitude = position.coords.latitude;
+            latitude = position.coords.latitude;
 
 //        console.log(position);
         //get geolocation coordinats for user
         //TODO rewrite comment in leaflet wiki on github!!!!
         var mapCenter = new L.LatLng(latitude, longitude); // geographical point (longitude and latitude)
         map.setView(mapCenter, 15).addLayer(cloudmade);
+
+        $.ajax({
+          url: "/api",
+          type: "get",
+          data: {},
+          dataType: "json",
+          success : function(data){
+//      console.log(data.vehicles.veh.length);
+            data = data.vehicles.veh;
+            for (i = 0; i < data.length; i++){
+              var bus = data[i],
+                busCoord = new L.LatLng(bus.lat/1000000, bus.lon/1000000),
+                busMarker = new L.Marker(busCoord);
+
+              map.addLayer(busMarker);
+            }
+          }
+        });
 
         //set markers
 //                var youAreHere = new L.LatLng(latitude, longitude);
