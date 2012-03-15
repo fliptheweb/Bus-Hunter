@@ -14,7 +14,7 @@ $(document).ready(function() {
       var defaultCoords = {
         lat : "54.619886",
         lng : "39.744954",
-        zoom : 15
+        zoom : 14
       };
       var mapCenter = new L.LatLng(defaultCoords.lat, defaultCoords.lng);
       map.setView(mapCenter, defaultCoords.zoom);
@@ -45,34 +45,38 @@ $(document).ready(function() {
         dataType: "json",
         success : function(data){
 //      console.log(data.vehicles.veh.length);
-          data = data.vehicles.veh;
+
+          var data = data.vehicles.veh,
+//              buses = app.buses,
+              busesDump = [];
+
           for (i = 0; i < data.length; i++){
             var bus = data[i],
                 busCoord = new L.LatLng(bus.lat/1000000, bus.lon/1000000),
-                busMarker = new L.Marker(busCoord),
-                busesDump = [];
+                busMarker = new L.Marker(busCoord);
 
             //todo переписать это позорище ;)
-            var busExist = false,
-                buses = app.buses;
-            for (ii = 0; buses.length; ii++) {
-              if (buses[ii] != undefined){
-                if(bus.rnum == buses[ii].busNumber){
+            var busExist = false;
+            for (ii = 0; ii < app.buses.length; ii++) {
+              if (app.buses[ii] != undefined){
+                if(bus.gos_num == app.buses[ii].busNum){
+                  app.buses[ii].busMarker.setLatLng(busCoord);
                   busExist = true;
                 }
               }
             }
 
+            //if bus dont exist add marker and
             if(!busExist){
               map.addLayer(busMarker);
-              busesDump.push({
-                "busNumber": bus.rnum,
+              app.buses.push({
+                "busNum": bus.gos_num,
                 "busMarker": busMarker
               });
             }
           } //for
 
-          app.buses = busesDump;
+//          app.buses = busesDump;
         }
       });
     },
