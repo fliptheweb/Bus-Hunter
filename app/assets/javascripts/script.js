@@ -37,6 +37,7 @@ $(document).ready(function() {
 
     //get buses and draw
     drawBuses: function(){
+      var app = this;
       $.ajax({
         url: "/api",
         type: "get",
@@ -47,14 +48,38 @@ $(document).ready(function() {
           data = data.vehicles.veh;
           for (i = 0; i < data.length; i++){
             var bus = data[i],
-              busCoord = new L.LatLng(bus.lat/1000000, bus.lon/1000000),
-              busMarker = new L.Marker(busCoord);
+                busCoord = new L.LatLng(bus.lat/1000000, bus.lon/1000000),
+                busMarker = new L.Marker(busCoord),
+                busesDump = [];
 
-            map.addLayer(busMarker);
-          }
+            //todo переписать это позорище ;)
+            var busExist = false,
+                buses = app.buses;
+            for (ii = 0; buses.length; ii++) {
+              if (buses[ii] != undefined){
+                if(bus.rnum == buses[ii].busNumber){
+                  busExist = true;
+                }
+              }
+            }
+
+            if(!busExist){
+              map.addLayer(busMarker);
+              busesDump.push({
+                "busNumber": bus.rnum,
+                "busMarker": busMarker
+              });
+            }
+          } //for
+
+          app.buses = busesDump;
         }
       });
-    }
+    },
+
+    //array of buses
+    buses: []
+
   };
 
   app.init();
