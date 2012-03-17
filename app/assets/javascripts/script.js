@@ -109,11 +109,15 @@ $(document).ready(function() {
        //</pts>
     },
 
-    refreshInterval :undefined
+    refreshInterval :undefined,
+
+    getBusStation: function(){},
+    getBusRoutes: function(){}
 
   };
 
   app.init();
+
   $refreshButton.bind("click", function(){
     app.drawBuses();
   })
